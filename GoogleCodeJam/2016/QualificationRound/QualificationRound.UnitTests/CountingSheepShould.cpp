@@ -4,6 +4,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace QualificationRound;
+using namespace std;
 
 namespace QualificationRoundUnitTests
 {		
@@ -14,7 +15,8 @@ namespace QualificationRoundUnitTests
 		TEST_METHOD(ReturnInsomniaForZero)
 		{
 			auto countingSheep = CountingSheep{ 0 };
-			Assert::Fail();
+			countingSheep.CountOnce();
+			Assert::AreEqual(string{ "INSOMNIA" }, countingSheep.GetCount());
 		}
 
 	};
