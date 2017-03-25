@@ -7,17 +7,23 @@ using namespace QualificationRound;
 using namespace std;
 
 namespace QualificationRoundUnitTests
-{		
+{
 	TEST_CLASS(CountingSheepShould)
 	{
 	public:
-		
+
 		TEST_METHOD(ReturnInsomniaForZero)
 		{
 			auto countingSheep = CountingSheep{ 0 };
 			countingSheep.CountOnce();
 			string expectedCount = "INSOMNIA";
 			Assert::AreEqual(expectedCount, countingSheep.GetCount());
+		}
+
+		TEST_METHOD(NotSleepInitially)
+		{
+			auto countingSheep = CountingSheep{ 1 };
+			Assert::IsFalse(countingSheep.IsAsleep());
 		}
 
 	};

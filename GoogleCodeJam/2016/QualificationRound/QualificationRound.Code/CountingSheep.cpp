@@ -33,3 +33,8 @@ string CountingSheep::GetCount() const noexcept
 
 	return string{};
 }
+
+bool CountingSheep::IsAsleep() const noexcept
+{
+	return false;
+}

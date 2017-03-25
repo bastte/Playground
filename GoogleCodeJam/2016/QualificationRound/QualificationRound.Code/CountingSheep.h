@@ -19,6 +19,7 @@ namespace QualificationRound
 
 		void CountOnce() noexcept;
 		std::string GetCount() const noexcept;
+		bool IsAsleep() const noexcept;
 
 	private:
 		int m_number;
