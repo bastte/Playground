@@ -16,7 +16,8 @@ namespace QualificationRoundUnitTests
 		{
 			auto countingSheep = CountingSheep{ 0 };
 			countingSheep.CountOnce();
-			Assert::AreEqual(string{ "INSOMNIA" }, countingSheep.GetCount());
+			string expectedCount = "INSOMNIA";
+			Assert::AreEqual(expectedCount, countingSheep.GetCount());
 		}
 
 	};

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <unordered_map>
 
 #ifdef COUNTINGSHEEP_EXPORTS
 #define COUNTINGSHEEP_API _declspec(dllexport)
@@ -18,5 +19,10 @@ namespace QualificationRound
 
 		void CountOnce() noexcept;
 		std::string GetCount() const noexcept;
+
+	private:
+		int m_number;
+		int m_currentCount; // TODO: long long ?
+		std::unordered_map<int, bool> m_digitsSeen;
 	};
 }
