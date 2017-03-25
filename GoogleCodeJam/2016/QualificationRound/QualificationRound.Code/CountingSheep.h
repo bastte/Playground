@@ -22,6 +22,8 @@ namespace QualificationRound
 		bool IsAsleep() const noexcept;
 
 	private:
+		void UpdateDigitsSeen() noexcept;
+
 		int m_number;
 		int m_currentCount;
 		std::array<bool, 10> m_digitsSeen;

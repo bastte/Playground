@@ -11,13 +11,7 @@ CountingSheep::CountingSheep(int number) :
 	m_digitsSeen { false }
 {
 	// Update with digits from the initial number
-	int temp = number;
-	while (temp > 0)
-	{
-		int lastDigit = temp % 10;
-		m_digitsSeen[lastDigit] = true;
-		temp /= 10;
-	}
+	this->UpdateDigitsSeen();
 }
 
 CountingSheep::~CountingSheep()
@@ -34,8 +28,8 @@ string CountingSheep::GetCount() const noexcept
 	{
 		return "INSOMNIA";
 	}
-
-	return string{};
+	
+	return std::to_string(m_currentCount);
 }
 
 bool CountingSheep::IsAsleep() const noexcept
@@ -48,4 +42,15 @@ bool CountingSheep::IsAsleep() const noexcept
 		}
 	}
 	return true;
+}
+
+void CountingSheep::UpdateDigitsSeen() noexcept
+{
+	int temp = m_currentCount;
+	while (temp > 0)
+	{
+		int lastDigit = temp % 10;
+		m_digitsSeen[lastDigit] = true;
+		temp /= 10;
+	}
 }

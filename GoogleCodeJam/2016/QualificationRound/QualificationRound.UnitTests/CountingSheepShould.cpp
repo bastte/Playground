@@ -32,5 +32,12 @@ namespace QualificationRoundUnitTests
 			Assert::IsTrue(countingSheep.IsAsleep());
 		}
 
+		TEST_METHOD(ReturnInitialNumberIfSleepingImmediately)
+		{
+			auto countingSheep = CountingSheep{ 1234567890 };
+			string expectedCount = "1234567890";
+			Assert::AreEqual(expectedCount, countingSheep.GetCount());
+		}
+
 	};
 }
