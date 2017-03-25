@@ -26,5 +26,11 @@ namespace QualificationRoundUnitTests
 			Assert::IsFalse(countingSheep.IsAsleep());
 		}
 
+		TEST_METHOD(SleepImmediatelyIfNumberContainsAllDigits)
+		{
+			auto countingSheep = CountingSheep{ 1234567890 };
+			Assert::IsTrue(countingSheep.IsAsleep());
+		}
+
 	};
 }

@@ -7,12 +7,16 @@ using namespace std;
 
 CountingSheep::CountingSheep(int number) :
 	m_number{ number },
-	m_currentCount{ number }
+	m_currentCount{ number },
+	m_digitsSeen { false }
 {
-	m_digitsSeen = unordered_map<int, bool>{};
-	for (int i = 0; i < 10; ++i)
+	// Update with digits from the initial number
+	int temp = number;
+	while (temp > 0)
 	{
-		m_digitsSeen[i] = false;
+		int lastDigit = temp % 10;
+		m_digitsSeen[lastDigit] = true;
+		temp /= 10;
 	}
 }
 
@@ -36,5 +40,12 @@ string CountingSheep::GetCount() const noexcept
 
 bool CountingSheep::IsAsleep() const noexcept
 {
-	return false;
+	for (int i = 0; i < 10; ++i)
+	{
+		if (!(m_digitsSeen[i]))
+		{
+			return false;
+		}
+	}
+	return true;
 }
