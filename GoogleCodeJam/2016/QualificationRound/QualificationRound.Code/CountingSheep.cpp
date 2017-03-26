@@ -43,7 +43,7 @@ bool CountingSheep::IsAsleep() const noexcept
 {
 	for (int i = 0; i < 10; ++i)
 	{
-		if (!(m_digitsSeen[i]))
+		if (!m_digitsSeen[i])
 		{
 			return false;
 		}

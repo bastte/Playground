@@ -53,5 +53,17 @@ namespace QualificationRoundUnitTests
 			Assert::AreEqual(currentCount, countingSheep.GetCount());
 		}
 
+		TEST_METHOD(ReturnCorrectCountAfterAFewRounds)
+		{
+			auto countingSheep = CountingSheep{ 1692 };
+			Assert::IsFalse(countingSheep.IsAsleep());
+			countingSheep.CountOnce();
+			Assert::IsFalse(countingSheep.IsAsleep());
+			countingSheep.CountOnce();
+			Assert::IsTrue(countingSheep.IsAsleep());
+			string expectedCount = "5076";
+			Assert::AreEqual(expectedCount, countingSheep.GetCount());
+		}
+
 	};
 }
