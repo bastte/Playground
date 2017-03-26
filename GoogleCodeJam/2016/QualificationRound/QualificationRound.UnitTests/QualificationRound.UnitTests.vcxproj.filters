@@ -32,6 +32,9 @@
     <ClCompile Include="CountingSheepShould.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PancakeWaiterShould.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Input\A-small-practice.in">
