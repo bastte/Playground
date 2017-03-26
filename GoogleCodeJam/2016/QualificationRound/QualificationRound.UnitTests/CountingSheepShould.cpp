@@ -82,6 +82,9 @@ namespace QualificationRoundUnitTests
 			ifstream inputFile{ "Input/" + inputName + ".in", ifstream::in };
 			ofstream outputFile{ inputName + ".out", ofstream::trunc };
 
+			int testCaseCount;
+			inputFile >> testCaseCount;
+
 			int initialNumber;
 			int caseNumber{ 0 };
 
