@@ -39,5 +39,19 @@ namespace QualificationRoundUnitTests
 			Assert::AreEqual(expectedCount, countingSheep.GetCount());
 		}
 
+		TEST_METHOD(StopCountingWhenAsleep)
+		{
+			auto countingSheep = CountingSheep{ 1 };
+			for (int i = 0; i < 10; ++i)
+			{
+				countingSheep.CountOnce();
+			}
+
+			Assert::IsTrue(countingSheep.IsAsleep());
+			auto currentCount = countingSheep.GetCount();
+			countingSheep.CountOnce();
+			Assert::AreEqual(currentCount, countingSheep.GetCount());
+		}
+
 	};
 }

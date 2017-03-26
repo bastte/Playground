@@ -20,6 +20,13 @@ CountingSheep::~CountingSheep()
 
 void CountingSheep::CountOnce() noexcept
 {
+	if (this->IsAsleep())
+	{
+		return;
+	}
+
+	m_currentCount += m_number;
+	this->UpdateDigitsSeen();
 }
 
 string CountingSheep::GetCount() const noexcept
