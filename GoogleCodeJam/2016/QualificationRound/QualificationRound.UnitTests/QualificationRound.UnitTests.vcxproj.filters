@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{b99f4915-2701-43ac-8e84-4ed30d5548a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -29,5 +32,33 @@
     <ClCompile Include="CountingSheepShould.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Input\A-small-practice.in">
+      <Filter>Input</Filter>
+    </None>
+    <None Include="Input\B-large-practice.in">
+      <Filter>Input</Filter>
+    </None>
+    <None Include="Input\B-small-practice.in">
+      <Filter>Input</Filter>
+    </None>
+    <None Include="Input\C-large-practice.in">
+      <Filter>Input</Filter>
+    </None>
+    <None Include="Input\C-small-practice.in">
+      <Filter>Input</Filter>
+    </None>
+    <None Include="Input\D-large-practice.in">
+      <Filter>Input</Filter>
+    </None>
+    <None Include="Input\D-small-practice.in">
+      <Filter>Input</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Input\A-large-practice.in">
+      <Filter>Input</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../QualificationRound.Code/CountingSheep.h"
+#include <fstream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace QualificationRound;
@@ -63,6 +64,46 @@ namespace QualificationRoundUnitTests
 			Assert::IsTrue(countingSheep.IsAsleep());
 			string expectedCount = "5076";
 			Assert::AreEqual(expectedCount, countingSheep.GetCount());
+		}
+
+		TEST_METHOD(SolveSmallInput)
+		{
+			this->SolveTestCase("A-small-practice");
+		}
+
+		TEST_METHOD(SolveLargeInput)
+		{
+			this->SolveTestCase("A-large-practice");
+		}
+
+	private:
+		void SolveTestCase(string inputName)
+		{
+			ifstream inputFile{ "Input/" + inputName + ".in", ifstream::in };
+			ofstream outputFile{ inputName + ".out", ofstream::trunc };
+
+			int initialNumber;
+			int caseNumber{ 0 };
+
+			while (inputFile >> initialNumber)
+			{
+				auto sheep = CountingSheep{ initialNumber };
+				while (!sheep.IsAsleep())
+				{
+					if (sheep.GetCount() == "INSOMNIA")
+					{
+						break;
+					}
+
+					sheep.CountOnce();
+				}
+
+				auto lastNumberSeen = sheep.GetCount();
+				outputFile << "Case #" << ++caseNumber << ": " << lastNumberSeen << endl;
+			}
+
+			inputFile.close();
+			outputFile.close();
 		}
 
 	};

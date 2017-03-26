@@ -161,6 +161,20 @@
       <Project>{0e4b4765-ee93-40de-bc42-88c6c61f8d38}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Input\A-large-practice.in">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <FileType>Document</FileType>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
+    </Text>
+    <None Include="Input\A-small-practice.in" />
+    <None Include="Input\B-large-practice.in" />
+    <None Include="Input\B-small-practice.in" />
+    <None Include="Input\C-large-practice.in" />
+    <None Include="Input\C-small-practice.in" />
+    <None Include="Input\D-large-practice.in" />
+    <None Include="Input\D-small-practice.in" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
