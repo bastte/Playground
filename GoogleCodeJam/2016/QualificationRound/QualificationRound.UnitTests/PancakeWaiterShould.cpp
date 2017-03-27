@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
+#include "../QualificationRound.Code/PancakeWaiter.h"
 #include <fstream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace QualificationRound;
 using namespace std;
 
 namespace QualificationRoundUnitTests
@@ -13,7 +15,8 @@ namespace QualificationRoundUnitTests
 
 		TEST_METHOD(NotDoAnythingIfPancakesAlreadySorted)
 		{
-			Assert::Fail();
+			auto pancakeWaiter = PancakeWaiter{ "+++++" };
+			Assert::AreEqual(0, pancakeWaiter.SortPancakes());
 		}
 
 	};

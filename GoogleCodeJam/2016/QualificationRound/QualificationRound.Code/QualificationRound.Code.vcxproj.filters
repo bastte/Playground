@@ -24,6 +24,9 @@
     <ClInclude Include="CountingSheep.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PancakeWaiter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -33,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CountingSheep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PancakeWaiter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
