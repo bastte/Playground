@@ -14,10 +14,6 @@ CountingSheep::CountingSheep(int number) :
 	this->UpdateDigitsSeen();
 }
 
-CountingSheep::~CountingSheep()
-{
-}
-
 void CountingSheep::CountOnce() noexcept
 {
 	if (this->IsAsleep())

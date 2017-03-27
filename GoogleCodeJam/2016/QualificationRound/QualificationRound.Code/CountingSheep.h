@@ -15,7 +15,6 @@ namespace QualificationRound
 	{
 	public:
 		explicit CountingSheep(int number = 0);
-		~CountingSheep();
 
 		void CountOnce() noexcept;
 		std::string GetCount() const noexcept;
