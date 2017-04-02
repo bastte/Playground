@@ -4,17 +4,96 @@
 using namespace QualificationRound;
 using namespace std;
 
-// Potential algorithm:
-//	* ignore all the trailing +s
-//	* let N be the number of leading '-' and M the biggest series of '+' 
-//		* If N >= M flip all to transform them to '+'
-//		* Else flip twice to move the series of '+' on top the trailing + series
+PancakeWaiter::PancakeWaiter(string pancakes) 
+	: m_operationsCount{ 0 }, m_pancakes(pancakes.size())
+{
+	for (int i = 0; i < m_pancakes.size(); ++i)
+	{
+		m_pancakes[i] = pancakes[i] == '+';
+	}
+}
 
-PancakeWaiter::PancakeWaiter(string pancakes)
+PancakeWaiter::~PancakeWaiter()
 {
 }
 
 int PancakeWaiter::SortPancakes() noexcept
 {
-	return 0;
+	// Potential algorithm:
+	//	* ignore all the trailing +s
+	//	* let N be the number of leading '-' and M the biggest series of '+' 
+	//		* If N >= M flip all to transform them to '+'
+	//		* Else flip twice to move the series of '+' on top the trailing + series
+
+	while (!this->IsSorted())
+	{
+		int numberOfLeadingNonHappyFacePancakes = this->CalculateNumberOfLeadingNonHappyFacePancakes();
+		int maxNumberOfHappyFacePancakesNotAtTheEnd = this->CalculateNumberOfNonSortedHappyFacePancakes();
+
+		if (numberOfLeadingNonHappyFacePancakes >= maxNumberOfHappyFacePancakesNotAtTheEnd)
+		{
+			this->FlipAllNonSortedPancakes();
+			++m_operationsCount;
+		}
+	}
+
+	return m_operationsCount;
+}
+
+bool PancakeWaiter::IsSorted() const noexcept
+{
+	for (auto pancake : m_pancakes)
+	{
+		if (!pancake)
+			return false;
+	}
+
+	return true;
+}
+
+int PancakeWaiter::CalculateNumberOfLeadingNonHappyFacePancakes() const noexcept
+{
+	int numberOfLeadingNonHappyFacePancakes = 0;
+	for (auto pancake : m_pancakes)
+	{
+		if (pancake)
+			break;
+
+		++numberOfLeadingNonHappyFacePancakes;
+	}
+
+	return numberOfLeadingNonHappyFacePancakes;
+}
+
+int PancakeWaiter::CalculateNumberOfNonSortedHappyFacePancakes() const noexcept
+{
+	int maxNumberOfHappyFacePancakesNotAtTheEnd = 0;
+	int numberOfHappyFacePancakesNotAtTheEnd = 0;
+	for (auto pancake : m_pancakes)
+	{
+		if (pancake)
+		{
+			++numberOfHappyFacePancakesNotAtTheEnd;
+		}
+		else
+		{
+			if (numberOfHappyFacePancakesNotAtTheEnd > maxNumberOfHappyFacePancakesNotAtTheEnd)
+			{
+				maxNumberOfHappyFacePancakesNotAtTheEnd = numberOfHappyFacePancakesNotAtTheEnd;
+			}
+		}
+	}
+
+	return maxNumberOfHappyFacePancakesNotAtTheEnd;
+}
+
+void PancakeWaiter::FlipAllNonSortedPancakes() noexcept
+{
+	auto lastPancakeNotSorted = (find(m_pancakes.rbegin(), m_pancakes.rend(), false) + 1).base();
+	reverse(m_pancakes.begin(), lastPancakeNotSorted);
+	for (auto it = m_pancakes.begin(); it != lastPancakeNotSorted + 1; ++it)
+	{
+		bool oldValue = *it;
+		*it = !oldValue;
+	}
 }

@@ -19,5 +19,11 @@ namespace QualificationRoundUnitTests
 			Assert::AreEqual(0, pancakeWaiter.SortPancakes());
 		}
 
+		TEST_METHOD(SortAllPileInOneMove)
+		{
+			auto pancakeWaiter = PancakeWaiter{ "---" };
+			Assert::AreEqual(1, pancakeWaiter.SortPancakes());
+		}
+
 	};
 }
