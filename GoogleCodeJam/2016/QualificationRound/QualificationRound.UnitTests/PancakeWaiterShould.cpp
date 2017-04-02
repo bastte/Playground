@@ -31,5 +31,11 @@ namespace QualificationRoundUnitTests
 			Assert::AreEqual(1, pancakeWaiter.SortPancakes());
 		}
 
+		TEST_METHOD(SimpleSortInTwoMoves)
+		{
+			auto pancakeWaiter = PancakeWaiter{ "+-" };
+			Assert::AreEqual(2, pancakeWaiter.SortPancakes());
+		}
+
 	};
 }

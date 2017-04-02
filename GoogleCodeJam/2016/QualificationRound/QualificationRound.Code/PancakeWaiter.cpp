@@ -35,6 +35,14 @@ int PancakeWaiter::SortPancakes() noexcept
 			this->FlipAllNonSortedPancakes();
 			++m_operationsCount;
 		}
+		else
+		{
+			this->FlipBiggestHappyFaceSequence();
+			++m_operationsCount;
+
+			this->FlipAllNonSortedPancakes();
+			++m_operationsCount;
+		}
 	}
 
 	return m_operationsCount;
@@ -85,6 +93,37 @@ void PancakeWaiter::FlipAllNonSortedPancakes() noexcept
 	auto lastPancakeNotSorted = (find(m_pancakes.rbegin(), m_pancakes.rend(), false) + 1).base();
 	reverse(m_pancakes.begin(), lastPancakeNotSorted);
 	for (auto it = m_pancakes.begin(); it != lastPancakeNotSorted + 1; ++it)
+	{
+		bool oldValue = *it;
+		*it = !oldValue;
+	}
+}
+
+void PancakeWaiter::FlipBiggestHappyFaceSequence() noexcept
+{
+	// TODO: refactor this with the method that finds that sequence
+	int maxNumberOfHappyFacePancakesNotAtTheEnd = 0;
+	int numberOfHappyFacePancakesNotAtTheEnd = 0;
+	auto flippingPosition = m_pancakes.begin();
+	for (auto it = m_pancakes.begin(); it != m_pancakes.end(); ++it)
+	{
+		if (*it)
+		{
+			++numberOfHappyFacePancakesNotAtTheEnd;
+		}
+		else
+		{
+			if (numberOfHappyFacePancakesNotAtTheEnd > maxNumberOfHappyFacePancakesNotAtTheEnd)
+			{
+				maxNumberOfHappyFacePancakesNotAtTheEnd = numberOfHappyFacePancakesNotAtTheEnd;
+				flippingPosition = it;
+			}
+			numberOfHappyFacePancakesNotAtTheEnd = 0;
+		}
+	}
+
+	reverse(m_pancakes.begin(), flippingPosition);
+	for (auto it = m_pancakes.begin(); it != flippingPosition + 1; ++it)
 	{
 		bool oldValue = *it;
 		*it = !oldValue;
