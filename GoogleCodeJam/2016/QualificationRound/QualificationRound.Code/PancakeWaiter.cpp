@@ -53,16 +53,8 @@ bool PancakeWaiter::IsSorted() const noexcept
 
 int PancakeWaiter::CalculateNumberOfLeadingNonHappyFacePancakes() const noexcept
 {
-	int numberOfLeadingNonHappyFacePancakes = 0;
-	for (auto pancake : m_pancakes)
-	{
-		if (pancake)
-			break;
-
-		++numberOfLeadingNonHappyFacePancakes;
-	}
-
-	return numberOfLeadingNonHappyFacePancakes;
+	auto firstHappyFace = find(m_pancakes.begin(), m_pancakes.end(), true);
+	return firstHappyFace - m_pancakes.begin();
 }
 
 int PancakeWaiter::CalculateNumberOfNonSortedHappyFacePancakes() const noexcept
@@ -81,6 +73,7 @@ int PancakeWaiter::CalculateNumberOfNonSortedHappyFacePancakes() const noexcept
 			{
 				maxNumberOfHappyFacePancakesNotAtTheEnd = numberOfHappyFacePancakesNotAtTheEnd;
 			}
+			numberOfHappyFacePancakesNotAtTheEnd = 0;
 		}
 	}
 
