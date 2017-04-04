@@ -91,8 +91,13 @@ int PancakeWaiter::CalculateNumberOfNonSortedHappyFacePancakes() const noexcept
 void PancakeWaiter::FlipAllNonSortedPancakes() noexcept
 {
 	auto lastPancakeNotSorted = (find(m_pancakes.rbegin(), m_pancakes.rend(), false) + 1).base();
-	reverse(m_pancakes.begin(), lastPancakeNotSorted);
-	for (auto it = m_pancakes.begin(); it != lastPancakeNotSorted + 1; ++it)
+	this->FlipPancakes(lastPancakeNotSorted);
+}
+
+void PancakeWaiter::FlipPancakes(std::vector<bool>::iterator pancakeToFlip)
+{
+	reverse(m_pancakes.begin(), pancakeToFlip);
+	for (auto it = m_pancakes.begin(); it != pancakeToFlip + 1; ++it)
 	{
 		bool oldValue = *it;
 		*it = !oldValue;
@@ -122,10 +127,5 @@ void PancakeWaiter::FlipBiggestHappyFaceSequence() noexcept
 		}
 	}
 
-	reverse(m_pancakes.begin(), flippingPosition);
-	for (auto it = m_pancakes.begin(); it != flippingPosition + 1; ++it)
-	{
-		bool oldValue = *it;
-		*it = !oldValue;
-	}
+	this->FlipPancakes(flippingPosition);
 }

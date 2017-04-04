@@ -23,6 +23,7 @@ namespace QualificationRound
 		int CalculateNumberOfLeadingNonHappyFacePancakes() const noexcept;
 		int CalculateNumberOfNonSortedHappyFacePancakes() const noexcept;
 		void FlipAllNonSortedPancakes() noexcept;
+		void FlipPancakes(std::vector<bool>::iterator pancakeToFlip);
 		void FlipBiggestHappyFaceSequence() noexcept;
 
 		std::vector<bool> m_pancakes;
