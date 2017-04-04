@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PancakeWaiter.h"
+#include <iostream>
 
 using namespace QualificationRound;
 using namespace std;
@@ -27,6 +28,8 @@ int PancakeWaiter::SortPancakes() noexcept
 
 	while (!this->IsSorted())
 	{
+		this->PrintPancakes();
+
 		int numberOfLeadingNonHappyFacePancakes = this->CalculateNumberOfLeadingNonHappyFacePancakes();
 		auto biggestHappyFacePancakesNotAtEnd = this->CalculateNumberOfNonSortedHappyFacePancakes();
 
@@ -57,6 +60,16 @@ bool PancakeWaiter::IsSorted() const noexcept
 	}
 
 	return true;
+}
+
+void PancakeWaiter::PrintPancakes() const noexcept
+{
+	for (auto pancake : m_pancakes)
+	{
+		cout << pancake ? '+' : '-';
+	}
+
+	cout << endl;
 }
 
 int PancakeWaiter::CalculateNumberOfLeadingNonHappyFacePancakes() const noexcept
