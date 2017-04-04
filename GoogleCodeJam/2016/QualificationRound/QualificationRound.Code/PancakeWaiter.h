@@ -20,11 +20,12 @@ namespace QualificationRound
 
 	private:
 		bool IsSorted() const noexcept;
+
 		int CalculateNumberOfLeadingNonHappyFacePancakes() const noexcept;
-		int CalculateNumberOfNonSortedHappyFacePancakes() const noexcept;
-		void FlipAllNonSortedPancakes() noexcept;
+		std::pair<int, std::vector<bool>::iterator> CalculateNumberOfNonSortedHappyFacePancakes() noexcept;
+
 		void FlipPancakes(std::vector<bool>::iterator pancakeToFlip);
-		void FlipBiggestHappyFaceSequence() noexcept;
+		void FlipAllNonSortedPancakes() noexcept;
 
 		std::vector<bool> m_pancakes;
 		int m_operationsCount;

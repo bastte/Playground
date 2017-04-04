@@ -28,16 +28,16 @@ int PancakeWaiter::SortPancakes() noexcept
 	while (!this->IsSorted())
 	{
 		int numberOfLeadingNonHappyFacePancakes = this->CalculateNumberOfLeadingNonHappyFacePancakes();
-		int maxNumberOfHappyFacePancakesNotAtTheEnd = this->CalculateNumberOfNonSortedHappyFacePancakes();
+		auto biggestHappyFacePancakesNotAtEnd = this->CalculateNumberOfNonSortedHappyFacePancakes();
 
-		if (numberOfLeadingNonHappyFacePancakes >= maxNumberOfHappyFacePancakesNotAtTheEnd)
+		if (numberOfLeadingNonHappyFacePancakes >= biggestHappyFacePancakesNotAtEnd.first)
 		{
 			this->FlipAllNonSortedPancakes();
 			++m_operationsCount;
 		}
 		else
 		{
-			this->FlipBiggestHappyFaceSequence();
+			this->FlipPancakes(biggestHappyFacePancakesNotAtEnd.second);
 			++m_operationsCount;
 
 			this->FlipAllNonSortedPancakes();
@@ -65,48 +65,8 @@ int PancakeWaiter::CalculateNumberOfLeadingNonHappyFacePancakes() const noexcept
 	return firstHappyFace - m_pancakes.begin();
 }
 
-int PancakeWaiter::CalculateNumberOfNonSortedHappyFacePancakes() const noexcept
+pair<int, vector<bool>::iterator> PancakeWaiter::CalculateNumberOfNonSortedHappyFacePancakes() noexcept
 {
-	int maxNumberOfHappyFacePancakesNotAtTheEnd = 0;
-	int numberOfHappyFacePancakesNotAtTheEnd = 0;
-	for (auto pancake : m_pancakes)
-	{
-		if (pancake)
-		{
-			++numberOfHappyFacePancakesNotAtTheEnd;
-		}
-		else
-		{
-			if (numberOfHappyFacePancakesNotAtTheEnd > maxNumberOfHappyFacePancakesNotAtTheEnd)
-			{
-				maxNumberOfHappyFacePancakesNotAtTheEnd = numberOfHappyFacePancakesNotAtTheEnd;
-			}
-			numberOfHappyFacePancakesNotAtTheEnd = 0;
-		}
-	}
-
-	return maxNumberOfHappyFacePancakesNotAtTheEnd;
-}
-
-void PancakeWaiter::FlipAllNonSortedPancakes() noexcept
-{
-	auto lastPancakeNotSorted = (find(m_pancakes.rbegin(), m_pancakes.rend(), false) + 1).base();
-	this->FlipPancakes(lastPancakeNotSorted);
-}
-
-void PancakeWaiter::FlipPancakes(std::vector<bool>::iterator pancakeToFlip)
-{
-	reverse(m_pancakes.begin(), pancakeToFlip);
-	for (auto it = m_pancakes.begin(); it != pancakeToFlip + 1; ++it)
-	{
-		bool oldValue = *it;
-		*it = !oldValue;
-	}
-}
-
-void PancakeWaiter::FlipBiggestHappyFaceSequence() noexcept
-{
-	// TODO: refactor this with the method that finds that sequence
 	int maxNumberOfHappyFacePancakesNotAtTheEnd = 0;
 	int numberOfHappyFacePancakesNotAtTheEnd = 0;
 	auto flippingPosition = m_pancakes.begin();
@@ -127,5 +87,21 @@ void PancakeWaiter::FlipBiggestHappyFaceSequence() noexcept
 		}
 	}
 
-	this->FlipPancakes(flippingPosition);
+	return make_pair(maxNumberOfHappyFacePancakesNotAtTheEnd, flippingPosition);
+}
+
+void PancakeWaiter::FlipAllNonSortedPancakes() noexcept
+{
+	auto lastPancakeNotSorted = (find(m_pancakes.rbegin(), m_pancakes.rend(), false) + 1).base();
+	this->FlipPancakes(lastPancakeNotSorted);
+}
+
+void PancakeWaiter::FlipPancakes(std::vector<bool>::iterator pancakeToFlip)
+{
+	reverse(m_pancakes.begin(), pancakeToFlip);
+	for (auto it = m_pancakes.begin(); it != pancakeToFlip + 1; ++it)
+	{
+		bool oldValue = *it;
+		*it = !oldValue;
+	}
 }
