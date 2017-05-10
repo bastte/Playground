@@ -31,3 +31,6 @@
 # Visual Studio
 Debug/
 .vs/
+
+# Haskell
+.stack-work/
