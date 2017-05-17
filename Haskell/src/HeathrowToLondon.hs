@@ -10,16 +10,23 @@ module HeathrowToLondon (computePath, sampleRoadBlocks) where
 --           C
 --           |
 -- ---- B ----
-data RoadBlock = RoadBlock Int Int Int deriving (Show)
+data RoadBlock = RoadBlock { a :: Int, b :: Int, c :: Int }
+    deriving (Show)
+type Roads = [RoadBlock]
+
 -- This is the current position: we're always either at the top (on the A road)
 -- or the bottom (on the B road)
 data Position = Top | Bottom
 
 -- From the exercise
-sampleRoadBlocks = [ RoadBlock 50 10 30, RoadBlock 5 90 20, RoadBlock 40 2 25, RoadBlock 10 8 0 ]
+sampleRoadBlocks = [ RoadBlock 50 10 30
+                   , RoadBlock 5 90 20
+                   , RoadBlock 40 2 25
+                   , RoadBlock 10 8 0 
+                   ]
 
 -- Takes the road blocks and prints the shortest path
-computePath :: [RoadBlock] -> [Int]
+computePath :: Roads -> [Int]
 computePath roadBlocks
     | bottomPathScore < topPathScore = shortestPathFromBottom
     | otherwise = shortestPathFromTop
@@ -27,7 +34,7 @@ computePath roadBlocks
         (shortestPathFromBottom, bottomPathScore) = (computePathAux Bottom roadBlocks, sum shortestPathFromBottom)
         (shortestPathFromTop, topPathScore) = (computePathAux Top roadBlocks, sum shortestPathFromTop)
 
-computePathAux :: Position -> [RoadBlock] -> [Int]
+computePathAux :: Position -> Roads -> [Int]
 computePathAux _ [] = []
 computePathAux currentPosition (RoadBlock a b c : blocks)
     | topPathScore < bottomPathScore = topPath
