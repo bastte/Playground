@@ -19,6 +19,7 @@ library
                      , RPNCalculator
                      , WordsSplitter
                      , HeathrowToLondon
+                     , NQueens
   build-depends:       base >= 4.7 && < 5
                      , containers
   default-language:    Haskell2010
